@@ -86,7 +86,7 @@ public class Patient {
 				output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btnUpdate btn btn-secondary\"></td>"
 						+ "<td><form method=\"post\" action=\"patients.jsp\">"
 						+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-						+ "<input name=\"itemID\" type=\"hidden\" value=\"" + patientID + "\">" + "</form></td></tr>";
+						+ "<input name=\"patientID\" type=\"hidden\" value=\"" + patientID + "\">" + "</form></td></tr>";
 			}
 			con.close();
 			// Complete the html table

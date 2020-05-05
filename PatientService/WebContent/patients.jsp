@@ -3,8 +3,8 @@
 <%@ page import="model.Patient" %>	
 <% 
 
-   session.setAttribute("statusMsg", "");
-   System.out.println("Trying to process...");
+   //session.setAttribute("statusMsg", "");
+   //System.out.println("Trying to process...");
    //Save----------------------------------------
    if (request.getParameter("patientName") != null) {
 	   Patient patientObj = new Patient();
@@ -56,22 +56,23 @@
 			action="patients.jsp">
 			<div class="form-group">
 
-				<lable for="patientID">Patient ID:</lable>
+				<label for="patientID">Patient ID:</label>
 				<input type="patientID" class="form-control" id="patientID" placeholder="Enter your ID" name="patientID"><br>
 
-				<lable for="patientName">Patient Name:</lable>
+				<label for="patientName">Patient Name:</label>
 				<input type="patientName" class="form-control" id="patientName" placeholder="Enter your Name" name="patientName"><br>
 				
-				<lable for="patientAddress">Patient Address:</lable>
+				<label for="patientAddress">Patient Address:</label>
 				<input type="patientAddress" class="form-control" id="patientAddress" placeholder="Enter your Address" name="patientAddress"><br>
 				
-				<lable for="patientAge">Patient Age:</lable>
+				<label for="patientAge">Patient Age:</label>
 				<input type="patientAge" class="form-control" id="patientAge" placeholder="Enter your Age" name="patientAge"><br>
 				
-				<lable for="patientPhone">Patient Phone:</lable>
+				<label for="patientPhone">Patient Phone:</label>
 				<input type="patientPhone" class="form-control" id="patientPhone" placeholder="Enter your Phone" name="patientPhone"><br>
 
-				<input id="btnSave" name="btnSave" type="submit" value="Save" class="btn btn-primary"> 
+				<input id="btnSave" name="btnSave" type="submit" value="Save" class="btn btn-primary">
+				<input id="btnDelete" name="btnDelete" type="submit" value="Delete" class="btn btn-primary"> 
 			<!--  	<input type="hidden" id="hidPatientIDSave" name="hidPatientIDSave" value=""> -->
 			</div>
 		</form>
