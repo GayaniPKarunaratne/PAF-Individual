@@ -29,7 +29,7 @@ public class Patient {
 		return con;
 	}
 
-	public String insertPatient(String id, String name, String address, String age, String phone) {
+	public String insertPatient(String name, String address, String age, String phone) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -37,15 +37,15 @@ public class Patient {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into patients(patientID,patientName,patientAddress,patientAge,patientPhone)"
-					+ "values (?, ?, ?, ?, ?)";
+			String query = " insert into patients(patientName,patientAddress,patientAge,patientPhone)"
+					+ "values (?, ?, ?, ? )";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setString(1, id);
-			preparedStmt.setString(2, name);
-			preparedStmt.setString(3, address);
-			preparedStmt.setString(4, age);
-			preparedStmt.setString(5, phone);
+			//preparedStmt.setString(1, id);
+			preparedStmt.setString(1, name);
+			preparedStmt.setString(2, address);
+			preparedStmt.setString(3, age);
+			preparedStmt.setString(4, phone);
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -65,7 +65,7 @@ public class Patient {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>Patient ID</th><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Phone</th><th>Update</th><th>Remove</th></tr>";
+			output = "<table class='table table-striped table-light'><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Phone</th><th>Update</th><th>Remove</th></tr>";
 			String query = "select * from patients";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -77,16 +77,19 @@ public class Patient {
 				String patientAge = rs.getString("patientAge");
 				String patientPhone = rs.getString("patientPhone");
 				// Add into the html table
-				output += "<tr><td>" + patientID + "</td>";
-				output += "<td>" + patientName + "</td>";
+				output += "<tr><td><input id=\"hidPatientIDUpdate\" name=\"hidPatientIDUpdate\"type=\"hidden\" value=\"" + patientID + "\">" + patientName + "</td>";
 				output += "<td>" + patientAddress + "</td>";
 				output += "<td>" + patientAge + "</td>";
 				output += "<td>" + patientPhone + "</td>";
 				// buttons
+				
+				
+
+				
 				output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btnUpdate btn btn-secondary\"></td>"
 						+ "<td><form method=\"post\" action=\"patients.jsp\">"
 						+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-						+ "<input name=\"patientID\" type=\"hidden\" value=\"" + patientID + "\">" + "</form></td></tr>";
+						+ "<input name=\"hidPatientIDDelete\" type=\"hidden\" value=\"" + patientID + "\">"+ "</form></td></tr>";
 			}
 			con.close();
 			// Complete the html table

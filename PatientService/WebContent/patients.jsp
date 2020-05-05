@@ -11,16 +11,14 @@
        String stsMsg = "";
     
     //Insert--------------------------
-    if (request.getParameter("patientID") == "") {
-        stsMsg = patientObj.insertPatient(request.getParameter("patientID"),
-                request.getParameter("patientName"), 
+    if (request.getParameter("hidPatientIDSave") == "") {
+        stsMsg = patientObj.insertPatient(request.getParameter("patientName"), 
                 request.getParameter("patientAddress"), 
                 request.getParameter("patientAge"),
                 request.getParameter("patientPhone"));
     } else//Update----------------------
     {
-        stsMsg = patientObj.updatePatient(
-                        request.getParameter("patientID"), 
+        stsMsg = patientObj.updatePatient(request.getParameter("hidPatientIDSave"),
                         request.getParameter("patientName"), 
                         request.getParameter("patientAddress"), 
                         request.getParameter("patientAge"), 
@@ -29,11 +27,9 @@
     session.setAttribute("statusMsg", stsMsg);
    }
    //Delete--------------------------------
-   if (request.getParameter("patientID") != null) {
+   if (request.getParameter("hidPatientIDDelete") != null) {
 	Patient patientObj = new Patient();
-    String
-    stsMsg = patientObj.deletePatient(request
-            .getParameter("patientID"));
+    String stsMsg = patientObj.deletePatient(request.getParameter("hidPatientIDDelete"));
     session.setAttribute("statusMsg", stsMsg);
    }
    %>	
@@ -52,12 +48,12 @@
 	<div class="container">
 		<h2>Patient Register Details</h2>
 
-		<form class="formPatient" name="formPatient" method="post"
+		<form class="formPatient" name="formPatient" method="post" id="formPatient"
 			action="patients.jsp">
 			<div class="form-group">
 
-				<label for="patientID">Patient ID:</label>
-				<input type="patientID" class="form-control" id="patientID" placeholder="Enter your ID" name="patientID"><br>
+			<!-- 	<label for="patientID">Patient ID:</label>
+				<input type="patientID" class="form-control" id="patientID" placeholder="Enter your ID" name="patientID"><br>  -->
 
 				<label for="patientName">Patient Name:</label>
 				<input type="patientName" class="form-control" id="patientName" placeholder="Enter your Name" name="patientName"><br>
@@ -71,9 +67,8 @@
 				<label for="patientPhone">Patient Phone:</label>
 				<input type="patientPhone" class="form-control" id="patientPhone" placeholder="Enter your Phone" name="patientPhone"><br>
 
-				<input id="btnSave" name="btnSave" type="submit" value="Save" class="btn btn-primary">
-				<input id="btnDelete" name="btnDelete" type="submit" value="Delete" class="btn btn-primary"> 
-			<!--  	<input type="hidden" id="hidPatientIDSave" name="hidPatientIDSave" value=""> -->
+				<button id="btnSave" name="btnSave" type="button"  value="Save" class="btn btn-primary">Save</button>
+			  	<input type="hidden" id="hidPatientIDSave" name="hidPatientIDSave" value="">
 			</div>
 		</form>
 
@@ -82,6 +77,9 @@
 				out.print(session.getAttribute("statusMsg"));
 			%>
 
+		</div>
+		<div id="alertError" class="alert alert-danger">
+	
 		</div>
 
 		<%
