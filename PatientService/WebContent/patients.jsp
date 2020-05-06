@@ -11,17 +11,16 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./Components/patients.js"></script>
 </head>
 <body>
 
 	<div class="container">
-		<h2>Patient Register Details</h2>
+	<div class="row">
+	<div class="col-6">
+		<h2>Patient Register Details2</h2>
 
-		<form class="formPatient" name="formPatient" method="post"
-			id="formPatient" action="patients.jsp">
+		<form name="formPatient" id="formPatient">
 			<div class="form-group">
 
 				<!-- 	<label for="patientID">Patient ID:</label>
@@ -37,32 +36,31 @@
 
 				<label for="patientAge">Patient Age:</label> <input
 					type="patientAge" class="form-control" id="patientAge"
-					placeholder="Enter your Age" name="patientAge"><br> <label
-					for="patientPhone">Patient Phone:</label> <input
+					placeholder="Enter your Age" name="patientAge"><br> 
+				<label for="patientPhone">Patient Phone:</label> <input
 					type="patientPhone" class="form-control" id="patientPhone"
 					placeholder="Enter your Phone Number" name="patientPhone"><br>
 
-				<button id="btnSave" name="btnSave" type="button" value="Save"
-					class="btn btn-primary">Save</button>
+				<input id="btnSave" name="btnSave" type="button" value="Save"
+					class="btn btn-primary">
 				<input type="hidden" id="hidPatientIDSave" name="hidPatientIDSave"
 					value="">
 			</div>
 		</form>
 
-		<div id="alertSuccess" class="alert alert-success">
-			<%
-				out.print(session.getAttribute("statusMsg"));
-			%>
-
-		</div>
+		<div id="alertSuccess" class="alert alert-success"></div>
 		<div id="alertError" class="alert alert-danger"></div>
+		<br>
 		
+		<div id="divPatientsGrid">
 			<%
 				Patient patientObj = new Patient();
-			out.print(patientObj.readPatients());
+				out.print(patientObj.readPatients());
 			%>
-		
-		<script language="javascript">
-			</body>
-			</html>
+		</div>
+	</div>
+	</div>
+	</div>
+</body>
+</html>
 		

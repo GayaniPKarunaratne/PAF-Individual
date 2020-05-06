@@ -6,7 +6,7 @@ $(document).ready(function() {
 });
 // SAVE ============================================
 $(document).on("click", "#btnSave", function(event) {
-	console.log("called");
+	//console.log("called");
 	// Clear alerts---------------------
 	$("#alertSuccess").text("");
 	$("#alertSuccess").hide();
@@ -14,14 +14,14 @@ $(document).on("click", "#btnSave", function(event) {
 	$("#alertError").hide();
 	// Form validation-------------------
 	var status = validatePatientForm();
-	console.log(status !== "success");
+	//console.log(status !== "success");
 	if (status !== "success") {
 		$("#alertError").text(status);
 		$("#alertError").show();
 		return;
 	}
 	// If valid------------------------
-	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
+	var type = ($("#hidPatientIDSave").val() == "") ? "POST" : "PUT";
 
 	$.ajax({
 		url : "PatientsAPI",
@@ -34,6 +34,7 @@ $(document).on("click", "#btnSave", function(event) {
 	});
 	// $("#formPatient").submit();
 });
+
 
 function onPatientSaveComplete(response, status) {
 	if (status == "success") {
@@ -63,14 +64,9 @@ function onPatientSaveComplete(response, status) {
 }
 
 // UPDATE==========================================
-$(document)
-		.on(
-				"click",
-				".btnUpdate",
-				function(event) {
+$(document).on("click",".btnUpdate",function(event) {
 					$("#hidPatientIDSave").val(
-							$(this).closest("tr").find('#hidPatientIDUpdate')
-									.val());
+							$(this).closest("tr").find('#hidPatientIDUpdate').val());
 					$("#patientName").val(
 							$(this).closest("tr").find('td:eq(0)').text());
 					$("#patientAddress").val(
@@ -79,6 +75,7 @@ $(document)
 							$(this).closest("tr").find('td:eq(2)').text());
 					$("#patientPhone").val(
 							$(this).closest("tr").find('td:eq(3)').text());
+					
 				});
 // DELETE===========================================================================
 
@@ -86,7 +83,7 @@ $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
 		url : "PatientsAPI",
 		type : "DELETE",
-		data : "patientID=" + $(this).data("patientid"),
+		data : "patientID=" + $(this).closest("tr").find('#hidPatientIDUpdate').val(),
 		dataType : "text",
 		complete : function(response, status) {
 			onPatientDeleteComplete(response.responseText, status);
